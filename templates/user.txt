@@ -1,0 +1,5 @@
+user,password,id,curso
+
+jhon,1234,1193,05
+jorge,2025,31498504,3
+alex,1485,1424,7
