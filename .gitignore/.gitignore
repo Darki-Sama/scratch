@@ -1,0 +1,37 @@
+from flask import Flask
+from flask import Flask, flash, redirect, render_template, request, session, abort
+import os
+
+ 
+app = Flask(__name__)
+ 
+@app.route('/')
+def home():
+    if not session.get('logged_in'):
+        return render_template('login.html')
+    else:
+        return render_template('preguntas.html')
+ 
+@app.route('/login', methods=['POST'])
+def do_admin_login():
+    f = open("user.txt", "r")
+    contraseña = request.form['password']
+    usuario = request.form['username']
+    for line in f.readlines():
+        us = line.strip().split(",")
+        cn = line.strip().split(",")
+        if (usuario in us):
+            if (contraseña in cn):
+                session['logged_in'] = True
+    flash('digite bien los datos')
+    return home()
+
+
+@app.route("/logout")
+def logout():
+    session['logged_in'] = False
+    return home()
+ 
+if __name__ == "__main__":
+    app.secret_key = os.urandom(12)
+    app.run(debug=True,host='localhost', port=4000)
