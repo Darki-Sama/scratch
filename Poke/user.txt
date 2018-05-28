@@ -1,0 +1,4 @@
+user,password,rol,curso
+jhon,1234,admin,5
+jorge,2025,user,3
+alex,1485,user,7
